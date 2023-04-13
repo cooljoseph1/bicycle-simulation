@@ -1,0 +1,134 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Backflipping Bicycles (Project Proposal)},
+  pdfauthor={Joseph Camacho},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Backflipping Bicycles (Project Proposal)}
+\author{Joseph Camacho}
+\date{March 22, 2023}
+
+\begin{document}
+\maketitle
+
+\hypertarget{main-idea}{%
+\subsection{Main Idea}\label{main-idea}}
+
+I want to simulate a bicyclist doing backflips off a ramp. A "success"
+is a robot that manages to do a complete backflip and land on its wheels
+without crashing.
+
+I plan to start with a basic model that models the bicycle as two
+wheels, a seat, and handlebars and the bicyclist as a torso with two
+arms:\\
+\begin{center}
+\includegraphics[height=7cm]{/home/joseph/mit-classes/Excalidraw/Project Proposal 2023-03-22 22.35.41.excalidraw.png}\\
+\end{center}
+and add more details later (if I can successfully simulate this first).
+
+The bicycist will have two controls:
+\begin{enumerate}
+\tightlist
+\item
+  He can use the pedals, accelerating the bicycle forwards.
+\item
+  He can pull up on the handlebar, leading to an equal and opposite push
+  down on the seat.
+\end{enumerate}
+These are the only controls he will have-\/-it\textquotesingle s a
+very underactuated system.  This is an interesting problem because at first glance it might seem impossible to do a back flip with only these controls, but humans have been able to successfully do so anyways.
+
+\hypertarget{topics-related-to-class}{%
+\subsection{Topics Related to Class}\label{topics-related-to-class}}
+
+\begin{enumerate}
+\tightlist
+\item
+  Underactuated robotics
+\item
+  Stability theory, probably using Lyapunov analysis (can I prove that
+  the robot will be able to balance, for example?)
+\item
+  Trajectory optimization
+\end{enumerate}
+
+\hypertarget{method}{%
+\subsection{Method}\label{method}}
+
+I plan to use Drake to do the simulation. I\textquotesingle m not yet
+sure which trajectory optimization methods I\textquotesingle ll use,
+though I plan to use something simple like an iterative linear quadratic
+regulator (as done in the homework exercise 10.3) if possible.
+
+\hypertarget{related-papers}{%
+\subsection{Related Papers}\label{related-papers}}
+
+I found a couple papers on bicycle simulation and learning stunts, but
+none that did backflipping in particular, and they mostly used
+reinforcement learning. Two of the more relevant papers I found were
+\url{https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=\&arnumber=8571685}
+and \url{https://dl.acm.org/doi/pdf/10.1145/2601097.2601121}.
+
+\end{document}
